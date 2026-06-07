@@ -1,0 +1,83 @@
+{% extends 'store/base.html' %}
+{% load static %}
+
+{% block title %}Home - MyStore{% endblock %}
+
+{% block content %}
+<div class="container">
+    <!-- Search and Filter Section -->
+    <div class="row mb-4">
+        <div class="col-md-8">
+            <form method="GET" class="d-flex">
+                <input type="text" name="search" class="form-control me-2" placeholder="Search products..." value="{{ search_query }}">
+                <button type="submit" class="btn btn-primary">Search</button>
+            </form>
+        </div>
+        <div class="col-md-4">
+            <form method="GET" class="d-flex">
+                <select name="category" class="form-select me-2" onchange="this.form.submit()">
+                    <option value="">All Categories</option>
+                    {% for category in categories %}
+                    <option value="{{ category }}" {% if category_filter == category %}selected{% endif %}>
+                        {{ category }}
+                    </option>
+                    {% endfor %}
+                </select>
+                {% if category_filter %}
+                <a href="{% url 'store:home' %}" class="btn btn-secondary">Clear</a>
+                {% endif %}
+            </form>
+        </div>
+    </div>
+
+    <!-- Products Grid -->
+    <div class="row">
+        {% if products %}
+            {% for product in products %}
+            <div class="col-md-3 mb-4">
+                <div class="card h-100 product-card">
+                    {% if product.image %}
+                    <img src="{{ product.image.url }}" class="card-img-top" alt="{{ product.name }}" style="height: 200px; object-fit: cover;">
+                    {% else %}
+                    <img src="https://via.placeholder.com/200x200?text=No+Image" class="card-img-top" alt="No image">
+                    {% endif %}
+                    <div class="card-body">
+                        <h5 class="card-title">{{ product.name }}</h5>
+                        <p class="card-text text-muted">{{ product.description|truncatewords:15 }}</p>
+                        <div class="d-flex justify-content-between align-items-center">
+                            <h4 class="text-primary">${{ product.price }}</h4>
+                            <span class="badge bg-secondary">{{ product.category }}</span>
+                        </div>
+                        <div class="mt-2">
+                            {% if product.stock > 0 %}
+                                <span class="badge bg-success">In Stock ({{ product.stock }})</span>
+                            {% else %}
+                                <span class="badge bg-danger">Out of Stock</span>
+                            {% endif %}
+                        </div>
+                    </div>
+                    <div class="card-footer bg-transparent">
+                        <div class="d-grid gap-2">
+                            <a href="{% url 'store:product_detail' product.id %}" class="btn btn-outline-primary">View Details</a>
+                            {% if product.stock > 0 %}
+                            <a href="{% url 'store:add_to_cart' product.id %}" class="btn btn-primary">
+                                <i class="fas fa-cart-plus"></i> Add to Cart
+                            </a>
+                            {% else %}
+                            <button class="btn btn-secondary" disabled>Out of Stock</button>
+                            {% endif %}
+                        </div>
+                    </div>
+                </div>
+            </div>
+            {% endfor %}
+        {% else %}
+            <div class="col-12">
+                <div class="alert alert-info text-center">
+                    <i class="fas fa-info-circle"></i> No products found.
+                </div>
+            </div>
+        {% endif %}
+    </div>
+</div>
+{% endblock %}

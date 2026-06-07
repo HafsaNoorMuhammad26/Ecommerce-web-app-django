@@ -1,0 +1,88 @@
+{% extends 'store/base.html' %}
+
+{% block title %}Admin - Order Details{% endblock %}
+
+{% block content %}
+<div class="container">
+    <div class="card">
+        <div class="card-header bg-primary text-white">
+            <h3 class="mb-0">Order Details: {{ order.order_id }}</h3>
+        </div>
+        <div class="card-body">
+            <div class="row mb-4">
+                <div class="col-md-6">
+                    <h5>Order Information</h5>
+                    <p><strong>Date:</strong> {{ order.created_at|date:"F d, Y H:i" }}</p>
+                    <p><strong>Customer:</strong> {{ order.user.username }} ({{ order.user.email }})</p>
+                    <p><strong>Total Amount:</strong> <span class="text-primary">${{ order.total_amount }}</span></p>
+                </div>
+                <div class="col-md-6">
+                    <h5>Shipping Information</h5>
+                    <p><strong>Name:</strong> {{ order.full_name }}</p>
+                    <p><strong>Email:</strong> {{ order.email }}</p>
+                    <p><strong>Phone:</strong> {{ order.phone }}</p>
+                    <p><strong>Address:</strong> {{ order.address }}, {{ order.city }}, {{ order.postal_code }}</p>
+                </div>
+            </div>
+            
+            <h5>Order Items</h5>
+            <div class="table-responsive mb-4">
+                <table class="table table-bordered">
+                    <thead class="table-dark">
+                        <tr>
+                            <th>Product</th>
+                            <th>Quantity</th>
+                            <th>Price</th>
+                            <th>Total</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {% for item in order.items.all %}
+                        <tr>
+                            <td>{{ item.product.name }}</td>
+                            <td>{{ item.quantity }}</td>
+                            <td>${{ item.price }}</td>
+                            <td>${{ item.get_total }}</td>
+                        </tr>
+                        {% endfor %}
+                    </tbody>
+                </table>
+            </div>
+            
+            <div class="row">
+                <div class="col-md-6">
+                    <div class="card">
+                        <div class="card-header">
+                            <h5>Update Order Status</h5>
+                        </div>
+                        <div class="card-body">
+                            <form method="POST">
+                                {% csrf_token %}
+                                <div class="mb-3">
+                                    <label class="form-label">Current Status:</label>
+                                    <div class="mb-2">
+                                        <span class="badge {% if order.status == 'Pending' %}bg-warning{% elif order.status == 'Confirmed' %}bg-info{% else %}bg-success{% endif %} fs-6">
+                                            {{ order.status }}
+                                        </span>
+                                    </div>
+                                    <select name="status" class="form-select" required>
+                                        <option value="">Select New Status</option>
+                                        <option value="Pending" {% if order.status == 'Pending' %}selected{% endif %}>Pending</option>
+                                        <option value="Confirmed" {% if order.status == 'Confirmed' %}selected{% endif %}>Confirmed</option>
+                                        <option value="Delivered" {% if order.status == 'Delivered' %}selected{% endif %}>Delivered</option>
+                                    </select>
+                                </div>
+                                <button type="submit" class="btn btn-primary">Update Status</button>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="mt-3">
+                <a href="{% url 'store:admin_orders' %}" class="btn btn-secondary">Back to Orders</a>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

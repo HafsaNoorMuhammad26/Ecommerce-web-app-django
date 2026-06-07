@@ -1,0 +1,356 @@
+/* ========================================
+   HAFSACART - CUSTOM COLOR THEME
+   ======================================== */
+
+:root {
+    /* Primary Theme Colors - Change these values to customize */
+    /* --primary-color: #e91e63;      Pink - Main brand color */
+    /* --primary-dark: #c2185b;       Darker pink for hover */
+    /* --primary-light: #f8bbd0;      Light pink for backgrounds */
+    --secondary-color: #9c27b0;    /* Purple - Secondary accent */
+    --accent-color: #ff9800;       /* Orange - Highlight elements */
+    --success-color: #4caf50;      /* Green - Success messages */
+    --danger-color: #f44336;       /* Red - Error/Danger */
+    --warning-color: #ffc107;      /* Yellow - Warnings */
+    --info-color: #2196f3;         /* Blue - Information */
+    --dark-color: #2c3e50;         /* Dark text */
+    --light-color: #f8f9fa;        /* Light background */
+    --gray-color: #6c757d;         /* Gray text */
+
+
+/* Alternative Color Palettes (Uncomment to use):
+
+   Purple Theme:
+   --primary-color: #9c27b0;
+   --primary-dark: #7b1fa2;
+   --primary-light: #e1bee7;
+
+   Blue Theme:
+   --primary-color: #2196f3;
+   --primary-dark: #1976d2;
+   --primary-light: #bbdefb;
+
+   Green Theme:
+   --primary-color: #4caf50;
+   --primary-dark: #388e3c;
+   --primary-light: #c8e6c9;
+
+   Orange Theme:
+   --primary-color: #ff9800;
+   --primary-dark: #f57c00;
+   --primary-light: #ffe0b2;
+
+   Red Theme:
+   --primary-color: #f44336;
+   --primary-dark: #d32f2f;
+   --primary-light: #ffcdd2;
+*/
+
+   --primary-color: #009688;
+   --primary-dark: #00796b;
+   --primary-light: #b2dfdb;
+}
+
+/* ===== NAVBAR STYLING ===== */
+.navbar {
+    background: linear-gradient(135deg, var(--primary-color), var(--primary-dark));
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+    padding: 1rem 0;
+}
+
+.navbar-brand {
+    font-size: 1.8rem;
+    font-weight: bold;
+    letter-spacing: 1px;
+}
+
+.navbar-brand i {
+    margin-right: 10px;
+    animation: pulse 2s infinite;
+}
+
+@keyframes pulse {
+    0% { transform: scale(1); }
+    50% { transform: scale(1.1); }
+    100% { transform: scale(1); }
+}
+
+.navbar-nav .nav-link {
+    color: white !important;
+    font-weight: 500;
+    margin: 0 5px;
+    transition: all 0.3s ease;
+    position: relative;
+}
+
+.navbar-nav .nav-link:hover {
+    transform: translateY(-2px);
+    text-shadow: 0 2px 5px rgba(0,0,0,0.2);
+}
+
+.navbar-nav .nav-link::after {
+    content: '';
+    position: absolute;
+    bottom: -5px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 0;
+    height: 2px;
+    background: white;
+    transition: width 0.3s ease;
+}
+
+.navbar-nav .nav-link:hover::after {
+    width: 80%;
+}
+
+/* Dropdown Styling */
+.dropdown-menu {
+    background: white;
+    border: none;
+    box-shadow: 0 5px 20px rgba(0,0,0,0.15);
+    border-radius: 10px;
+    margin-top: 10px;
+}
+
+.dropdown-item {
+    color: var(--dark-color);
+    transition: all 0.3s ease;
+    border-radius: 5px;
+    margin: 2px 5px;
+}
+
+.dropdown-item:hover {
+    background: var(--primary-light);
+    color: var(--primary-dark);
+    transform: translateX(5px);
+}
+
+/* ===== BUTTON STYLING ===== */
+.btn-primary {
+    background: linear-gradient(135deg, var(--primary-color), var(--primary-dark));
+    border: none;
+    padding: 10px 25px;
+    font-weight: 600;
+    border-radius: 25px;
+    transition: all 0.3s ease;
+    box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+}
+
+.btn-primary:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 5px 15px rgba(233, 30, 99, 0.3);
+    background: linear-gradient(135deg, var(--primary-dark), var(--primary-color));
+}
+
+.btn-outline-primary {
+    border: 2px solid var(--primary-color);
+    color: var(--primary-color);
+    background: transparent;
+    border-radius: 25px;
+    transition: all 0.3s ease;
+}
+
+.btn-outline-primary:hover {
+    background: var(--primary-color);
+    border-color: var(--primary-color);
+    transform: translateY(-2px);
+    box-shadow: 0 5px 15px rgba(233, 30, 99, 0.2);
+}
+
+.btn-success {
+    background: linear-gradient(135deg, var(--success-color), #45a049);
+    border: none;
+    border-radius: 25px;
+    padding: 10px 25px;
+    font-weight: 600;
+}
+
+.btn-danger {
+    background: linear-gradient(135deg, var(--danger-color), #d32f2f);
+    border: none;
+    border-radius: 25px;
+}
+
+/* Cart Badge */
+.badge {
+    font-size: 0.7rem;
+    padding: 0.35rem 0.65rem;
+    border-radius: 50px;
+}
+
+.navbar .badge {
+    background: var(--accent-color);
+    color: white;
+    animation: bounce 1s ease infinite;
+}
+
+@keyframes bounce {
+    0%, 100% { transform: translateY(0); }
+    50% { transform: translateY(-3px); }
+}
+
+/* ===== CARD STYLING ===== */
+.card {
+    border: none;
+    border-radius: 15px;
+    box-shadow: 0 5px 15px rgba(0,0,0,0.08);
+    transition: all 0.3s ease;
+    overflow: hidden;
+}
+
+.card:hover {
+    transform: translateY(-10px);
+    box-shadow: 0 15px 30px rgba(0,0,0,0.15);
+}
+
+.card-header {
+    background: linear-gradient(135deg, var(--primary-color), var(--primary-dark));
+    color: white;
+    border: none;
+    padding: 15px 20px;
+}
+
+.product-card {
+    position: relative;
+}
+
+.product-card .card-img-top {
+    transition: transform 0.5s ease;
+}
+
+.product-card:hover .card-img-top {
+    transform: scale(1.05);
+}
+
+/* ===== PRICE STYLING ===== */
+.text-primary {
+    color: var(--primary-color) !important;
+}
+
+.price-tag {
+    font-size: 1.5rem;
+    font-weight: bold;
+    color: var(--primary-color);
+}
+
+/* ===== FOOTER STYLING ===== */
+footer {
+    background: linear-gradient(135deg, var(--dark-color), #1a252f);
+    color: white;
+    position: relative;
+}
+
+footer::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 3px;
+    background: linear-gradient(90deg, var(--primary-color), var(--secondary-color), var(--primary-color));
+}
+
+/* ===== FORM STYLING ===== */
+.form-control:focus {
+    border-color: var(--primary-color);
+    box-shadow: 0 0 0 0.2rem rgba(233, 30, 99, 0.25);
+}
+
+/* ===== ALERT STYLING ===== */
+.alert-success {
+    background: linear-gradient(135deg, #d4edda, #c3e6cb);
+    border: none;
+    border-left: 5px solid var(--success-color);
+    color: #155724;
+}
+
+.alert-danger {
+    background: linear-gradient(135deg, #f8d7da, #f5c6cb);
+    border: none;
+    border-left: 5px solid var(--danger-color);
+}
+
+/* ===== CART PAGE STYLING ===== */
+.cart-item {
+    background: white;
+    border-radius: 10px;
+    padding: 15px;
+    margin-bottom: 15px;
+    transition: all 0.3s ease;
+}
+
+.cart-item:hover {
+    box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+}
+
+/* ===== CHECKOUT PAGE STYLING ===== */
+.checkout-card {
+    border-radius: 15px;
+    overflow: hidden;
+}
+
+/* ===== RESPONSIVE DESIGN ===== */
+@media (max-width: 768px) {
+    .navbar-brand {
+        font-size: 1.3rem;
+    }
+    
+    .btn-primary, .btn-outline-primary {
+        padding: 8px 15px;
+        font-size: 0.9rem;
+    }
+    
+    .card:hover {
+        transform: translateY(-5px);
+    }
+}
+
+/* ===== ANIMATIONS ===== */
+@keyframes fadeInUp {
+    from {
+        opacity: 0;
+        transform: translateY(20px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+.card {
+    animation: fadeInUp 0.5s ease forwards;
+}
+
+/* Loading Spinner - Match theme */
+.spinner-border {
+    color: var(--primary-color);
+}
+
+/* Scroll to Top Button */
+.scroll-top {
+    position: fixed;
+    bottom: 30px;
+    right: 30px;
+    background: var(--primary-color);
+    color: white;
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    opacity: 0;
+    transition: all 0.3s ease;
+    z-index: 1000;
+}
+
+.scroll-top.show {
+    opacity: 1;
+}
+
+.scroll-top:hover {
+    background: var(--primary-dark);
+    transform: translateY(-5px);
+}
